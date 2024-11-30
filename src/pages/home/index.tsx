@@ -1,5 +1,7 @@
 import { SocialMedia } from "../../components/socialmedia"
 
+import { FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa"
+
 export function Home() {
     return (
         <div className="flex flex-col w-full py-4 items-center justify-center">
@@ -17,7 +19,17 @@ export function Home() {
             </main>
 
             <footer className="flex justify-center gap-3 my-4">
-                <SocialMedia/>
+                <SocialMedia url="https://www.youtube.com/">
+                    <FaYoutube size={35} color="#fff"/>
+                </SocialMedia>
+
+                <SocialMedia url="https://www.instagram.com/">
+                    <FaInstagram size={35} color="#fff"/>
+                </SocialMedia>
+
+                <SocialMedia url="https://www.tiktok.com/">
+                    <FaTiktok size={35} color="#fff"/>
+                </SocialMedia>
             </footer>
             
         </div>
