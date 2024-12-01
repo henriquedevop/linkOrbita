@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Header } from "../../components/header";
 import { Input } from "../../components/input";
 
@@ -7,12 +7,51 @@ import { BiTrash } from "react-icons/bi";
 import { fireStore } from "../../services/firebaseConnection"
 import { addDoc, collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore";
 
+interface LinkProps {
+  id: string,
+  name: string,
+  url: string,
+  bg: string,
+  color: string,
+}
+
 export function Admin() {
 
   const [nameLink, setNameLink] = useState("")
   const [urlLink, setUrlLink] = useState("")
   const [colorBackgroundLink, setColorBackgroundLink] = useState("#f1f1f1")
   const [colorTextLink,setColorTextLink] = useState("#020202")
+
+  const [links, setLinks] = useState<LinkProps[]>([])
+
+  useEffect(() => {
+    
+    const linksRef = collection(fireStore, "links")
+    const queryRef = query(linksRef, orderBy("created", "asc"))
+
+    const unSub = onSnapshot(queryRef, (snapshot) => {
+
+      let arr = [] as LinkProps[]
+
+      snapshot.forEach((doc) => {
+        arr.push({
+          id: doc.id,
+          name: doc.data().name,
+          url: doc.data().url,
+          bg: doc.data().bg,
+          color: doc.data().color,
+        })
+      })
+
+      setLinks(arr)
+
+    })
+
+    return () => {
+      unSub()
+    }
+
+  },[])
 
   function handleRegister(e:FormEvent) {
     e.preventDefault()
@@ -33,8 +72,8 @@ export function Admin() {
       console.log("Cadastrado com sucesso!")
       setNameLink("")
       setUrlLink("")
-      setColorBackgroundLink("f1f1f1")
-      setColorTextLink("020202")
+      setColorBackgroundLink("#f1f1f1")
+      setColorTextLink("#020202")
     })
     .catch((error) => {
       console.log("Error ao adicionar link", error)
