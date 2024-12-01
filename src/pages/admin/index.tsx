@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "../../components/header";
 import { Input } from "../../components/input";
+import { BiTrash } from "react-icons/bi";
 
 export function Admin() {
 
@@ -55,21 +56,47 @@ export function Admin() {
           </div>
 
         </section>
-        
-        <div className="flex items-center justify-between flex-col mb-7 p-1 border-gray-100/25 border rounded-md">
-          <label className="text-white font-medium mt-2 mb-3">Veja como está ficando:</label>
-          <article
-          className="w-11/12 max-w-lg flex flex-col items-center justify-between rounded-md px-1 py-3"
-          style={{marginBlock: 8, backgroundColor: colorBackgroundLink}}
-          >
-            <p
-            className="font-medium"
-            style={{color: colorTextLink}}
-            >Canal do youtube</p>
-          </article>
+
+        {nameLink !== "" && (
+          <div className="flex items-center justify-between flex-col mb-7 p-1 border-gray-100/25 border rounded-md">
+
+            <label className="text-white font-medium mt-2 mb-3">Veja como está ficando:</label>
+            <article
+            className="w-11/12 max-w-lg flex flex-col items-center justify-between rounded-md px-1 py-3"
+            style={{marginBlock: 8, backgroundColor: colorBackgroundLink}}
+            >
+              <p
+              className="font-medium"
+              style={{color: colorTextLink}}
+              >{nameLink}</p>
+            </article>
+
         </div>
+        )}
+
+        <button
+        type="submit"
+        className=" mb-7 bg-indigo-600 h-9 text-white rounded-md font-medium gap-4 flex justify-center items-center">
+          Cadastrar
+        </button>
 
       </form>
+
+        <h2 className="font-bold text-white mb-4 text-2xl">Meus links:</h2>
+
+        <article 
+        style={{backgroundColor: "#039fff", color: "#fff"}}
+        className="flex items-center justify-between w-11/12 max-w-xl rounded-md py-3 px-2 mb-2 select-none">
+          <p>Meu instagram</p>
+          <div>
+            <button
+            className="border border-dashed p-1 rounded-md"
+            >
+              <BiTrash color="#fff" size={18}/> 
+            </button>
+          </div>
+        </article>
+
     </div>
   );
 }
