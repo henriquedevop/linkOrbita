@@ -81,6 +81,11 @@ export function Admin() {
 
   }
 
+  function handleDelete(id: string) {
+    const docRef = doc(fireStore, "links", id)
+    deleteDoc(docRef)
+  }
+
   return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2">
       <Header/>
@@ -155,18 +160,21 @@ export function Admin() {
 
         <h2 className="font-bold text-white mb-4 text-2xl">Meus links:</h2>
 
-        <article 
-        style={{backgroundColor: "#039fff", color: "#fff"}}
-        className="flex items-center justify-between w-11/12 max-w-xl rounded-md py-3 px-2 mb-2 select-none">
-          <p>Meu instagram</p>
-          <div>
-            <button
-            className="border border-dashed p-1 rounded-md"
-            >
-              <BiTrash color="#fff" size={18}/> 
-            </button>
-          </div>
-        </article>
+        {links.map((item) => (
+          <article 
+          style={{backgroundColor: item.bg, color: item.color}}
+          className="flex items-center justify-between w-11/12 max-w-xl rounded-md py-3 px-2 mb-2 select-none">
+            <p>{item.name}</p>
+            <div>
+              <button
+              className="border border-dashed p-1 rounded-md"
+              onClick={() => handleDelete(item.id)}
+              >
+                <BiTrash color="#fff" size={18}/> 
+              </button>
+            </div>
+          </article>
+        ))}
 
     </div>
   );
