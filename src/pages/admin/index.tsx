@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Header } from "../../components/header";
 import { Input } from "../../components/input";
+
 import { BiTrash } from "react-icons/bi";
+
+import { fireStore } from "../../services/firebaseConnection"
+import { addDoc, collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore";
 
 export function Admin() {
 
@@ -10,11 +14,39 @@ export function Admin() {
   const [colorBackgroundLink, setColorBackgroundLink] = useState("#f1f1f1")
   const [colorTextLink,setColorTextLink] = useState("#020202")
 
+  function handleRegister(e:FormEvent) {
+    e.preventDefault()
+
+    if(nameLink === "" || urlLink === "") {
+      alert("Preencha todos os campos!")
+      return
+    } 
+
+    addDoc(collection(fireStore, "links"), {
+      name: nameLink,
+      url: urlLink,
+      bg: colorBackgroundLink,
+      color: colorTextLink,
+      created: new Date(),
+    })
+    .then(() => {
+      console.log("Cadastrado com sucesso!")
+      setNameLink("")
+      setUrlLink("")
+      setColorBackgroundLink("f1f1f1")
+      setColorTextLink("020202")
+    })
+    .catch((error) => {
+      console.log("Error ao adicionar link", error)
+    })
+
+  }
+
   return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2">
       <Header/>
 
-      <form className="flex flex-col mt-8 mb-3 w-full max-w-xl">
+      <form onSubmit={handleRegister} className="flex flex-col mt-8 mb-3 w-full max-w-xl">
 
         <label className="text-white font-medium mt-2 mb-2">Nome do seu link:</label>
         <Input
