@@ -29,7 +29,6 @@ export function Header({ username }: HeaderProps) {
                         <Link to="/">Home</Link>
                     )}
                     <Link to="/admin">Meus links</Link>
-                    <Link to="/admin/social">Redes sociais</Link>
                 </div>
 
                 <button onClick={handleLogout}>
