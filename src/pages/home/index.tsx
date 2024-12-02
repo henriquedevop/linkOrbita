@@ -8,15 +8,20 @@ export function Home() {
         <div className="bg-bg min-h-screen">
             <header className="fixed top-0 left-0 right-0 z-50 flex flex-col md:flex-row items-center justify-between p-5 
             bg-black bg-opacity-30 backdrop-blur-lg">
-                <Link
-                to="/"
+                <a
+                href="#"
                 className="text-2xl md:text-3xl text-textColor font-bold">Link
                 <span className="text-primary"> Órbita</span>    
-                </Link>
-
+                </a>
+                
+                <div className="flex gap-2">
                 <Link 
-                className="text-base md:text-lg text-bg font-medium bg-textColor rounded-md px-4 py-2 mt-2 md:mt-0"
-                to="/login">Começe de graça</Link>
+                className="text-base md:text-lg text-bg font-medium bg-textColor rounded-md px-2 py-2 mt-2 md:mt-0"
+                to="/signup">Começe de graça</Link>
+                <Link 
+                className="text-base md:text-lg text-white font-medium border-2 rounded-md px-2 py-2 mt-2 md:mt-0"
+                to="/login">Já tenho conta</Link>
+                </div>
             </header>
 
             <main>
