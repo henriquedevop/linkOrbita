@@ -187,6 +187,29 @@ export function Home() {
                     </div>
                 </section>
 
+                <section className="bg-white py-20 text-center">
+                    <h3 className="text-3xl text-black font-bold mb-5">
+                        Pronto para centralizar seus links?
+                    </h3>
+                    <p className="text-black mb-10">
+                        Comece agora mesmo e crie sua página personalizada de forma rápida e eficiente.
+                    </p>
+                    <Link 
+                    className="text-lg bg-black text-primary font-bold px-6 py-3 rounded-md"
+                    to="signup">
+                    Crie sua conta gratuitamente
+                    </Link>
+                </section>
+
+                <section className="bg-bg-light py-20">
+                    <h3 className="text-2xl sm:text-3xl text-textColor font-semibold text-center mb-10">
+                        Sobre o Link Órbita
+                    </h3>
+                    <p className="text-zinc-200 max-w-4xl mx-auto text-center">
+                        O Link Órbita foi criado para ajudar pessoas a organizarem e compartilharem seus links de forma profissional e eficiente. Nossa missão é simplificar sua experiência digital com uma plataforma amigável e poderosa.
+                    </p>
+                </section>
+
             </main>
         </div>
     )
