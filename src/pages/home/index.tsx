@@ -202,7 +202,7 @@ export function Home() {
                         Comece agora mesmo e crie sua página personalizada de forma rápida e eficiente.
                     </p>
                     <Link 
-                    className="text-lg bg-black text-primary font-bold px-6 py-3 rounded-md"
+                    className="text-lg bg-black text-white font-bold px-6 py-3 rounded-md"
                     to="signup">
                     Crie sua conta gratuitamente
                     </Link>

@@ -20,19 +20,21 @@ export function Header({ username }: HeaderProps) {
     }
 
     return (
-        <header className="w-full max-w-2xl mt-4 px-1">
-            <nav className="w-full bg-white h-12 flex items-center justify-between rounded-md px-3">
-                <div className="flex gap-4 font-medium">
+        <header className="w-full max-w-2xl mt-6 px-2 text-white">
+            <nav className="w-full bg-black/25 backdrop-blur-lg h-14 flex items-center justify-between rounded-lg shadow-lg px-6 border border-white/20">
+                <div className="flex gap-4 font-semibold">
                     {username ? (
-                        <Link to={`/user/${username}`}>Minha página</Link>
+                        <Link className="hover:text-indigo-200 active:text-indigo-400" to={`/user/${username}`}>Minha página</Link>
                     ) : (
-                        <Link to="/">Home</Link>
+                        <Link className="hover:text-indigo-200 active:text-indigo-400" to="/">Home</Link>
                     )}
-                    <Link to="/admin">Editar Links</Link>
+                    <Link className="hover:text-indigo-200 active:text-indigo-400" to="/admin">Editar Links</Link>
                 </div>
 
-                <button onClick={handleLogout}>
-                    <BiLogOut size={28} color="#000"/>
+                <button 
+                className="text-white hover:text-indigo-200 active:text-indigo-400"
+                onClick={handleLogout}>
+                    <BiLogOut size={28}/>
                 </button>
             </nav>
         </header>
