@@ -148,6 +148,45 @@ export function Home() {
 
                 </section>
 
+                <section className="bg-bg py-20">
+
+                    <h3
+                    className="text-2xl md:text-3xl text-white font-semibold text-center mb-10"
+                    >Perguntas Frequentes
+                    </h3>
+
+                    <div className="max-w-4xl mx-auto space-y-6">
+
+                        <details className="bg-customGray rounded-md p-5">
+                            <summary className="text-white font-semibold cursor-pointer">
+                                O serviço é gratuito?
+                            </summary>
+                            <p className="text-zinc-200 mt-2">
+                                Sim! Você pode começar a usar gratuitamente sem nenhum problema!.
+                            </p>
+                        </details>
+
+                        <details className="bg-customGray rounded-md p-5">
+                            <summary className="text-white font-semibold cursor-pointer">
+                                Qualquer um pode acessar o link?
+                            </summary>
+                            <p className="text-zinc-200 mt-2">
+                                Sim! Basta compartilhar a url gerada e todos verão seus links.
+                            </p>
+                        </details>
+                        
+                        <details className="bg-customGray rounded-md p-5">
+                            <summary className="text-white font-semibold cursor-pointer">
+                                Existe um limites de links que posso cadastrar?
+                            </summary>
+                            <p className="text-zinc-200 mt-2">
+                                Não! não existe limites, basta criar e compartilhar.
+                            </p>
+                        </details>
+
+                    </div>
+                </section>
+
             </main>
         </div>
     )
