@@ -4,19 +4,19 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCeU2bPuMugYG4twZar8KbZuCu5qorwal0",
-  authDomain: "linkorbita-eb97a.firebaseapp.com",
-  projectId: "linkorbita-eb97a",
-  storageBucket: "linkorbita-eb97a.firebasestorage.app",
-  messagingSenderId: "525597800831",
-  appId: "1:525597800831:web:63ce19f6b2f411deee824a",
-  measurementId: "G-LYC07L1BGN"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
-const fireStore = getFirestore()
+const auth = getAuth(app);
+const fireStore = getFirestore();
 const analytics = getAnalytics(app);
 
-export { auth, fireStore}
+export { auth, fireStore, analytics };
