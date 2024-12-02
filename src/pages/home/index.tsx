@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import { BiWorld } from "react-icons/bi"
+import { BiWorld, BiLink, BiShield } from "react-icons/bi"
 import { FaPaintBrush, FaShare } from "react-icons/fa"
 
 export function Home() {
@@ -109,14 +109,44 @@ export function Home() {
                             <h4 className="text-white font-bold">- Anna Júlia</h4>
                         </div>
 
-                        
-
                     </div>
                     
 
                 </section>
 
-                
+                <section className="bg-primary py-20">
+                    <h3
+                    className="text-2xl md:text-3xl text-white font-semibold text-center mb-10"
+                    >Funcionalidades que fazem a diferença
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-5">
+
+                        <div className="text-center">
+                            <BiWorld size={60} className="text-white mx-auto mb-4"/>
+                            <h4 className="text-lg text-white font-bold">Página personalizada</h4>
+                            <p className="text-white text-sm">
+                            Crie uma página com links que representa sua identidade.
+                            </p>
+                        </div>
+
+                        <div className="text-center">
+                            <BiLink size={60} className="text-white mx-auto mb-4"/>
+                            <h4 className="text-lg text-white font-bold">Integração com Redes</h4>
+                            <p className="text-white text-sm">
+                            Conecte suas redes sociais e torne tudo mais acessível.
+                            </p>
+                        </div>
+
+                        <div className="text-center">
+                            <BiShield size={60} className="text-white mx-auto mb-4"/>
+                            <h4 className="text-lg text-white font-bold">Segurança Avançada</h4>
+                            <p className="text-white text-sm">
+                            Seus dados estão seguros com criptografia e autenticação confiável.
+                            </p>
+                        </div>
+                    </div>
+
+                </section>
 
             </main>
         </div>
