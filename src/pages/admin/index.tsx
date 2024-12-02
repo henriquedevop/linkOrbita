@@ -142,7 +142,7 @@ export function Admin() {
         className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
         />
 
-        <section className="flex my-4 gap-5">
+        <section className="flex my-4 gap-5 flex-col">
 
           <div className="flex items-center gap-2">
 
