@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router";
 import { Input } from "../../components/input";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { auth } from "../../services/firebaseConnection"
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 export function Login() {
 
@@ -13,8 +13,6 @@ export function Login() {
 
     function handleSubmit(e:FormEvent) {
         e.preventDefault()
-        setEmail("")
-        setPassword("")
 
         if(email === "" || password === "") {
             alert("Preencha todos os campos!")
@@ -31,7 +29,21 @@ export function Login() {
             console.log(error)
         })
 
+        setEmail("")
+        setPassword("")
+
     }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if(user) {
+                navigate("/admin", {replace: true})
+            }
+        })
+
+        return () => unsubscribe()
+
+    },[navigate])
 
     return (
         <div className="flex w-full h-screen items-center justify-center bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
