@@ -7,7 +7,7 @@ import { BiTrash } from "react-icons/bi";
 import { fireStore } from "../../services/firebaseConnection"
 import { addDoc, collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore";
 
-interface LinkProps {
+export interface LinkProps {
   id: string,
   name: string,
   url: string,
@@ -162,6 +162,7 @@ export function Admin() {
 
         {links.map((item) => (
           <article 
+          key={item.id}
           style={{backgroundColor: item.bg, color: item.color}}
           className="flex items-center justify-between w-11/12 max-w-xl rounded-md py-3 px-2 mb-2 select-none">
             <p>{item.name}</p>
