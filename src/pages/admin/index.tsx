@@ -2,10 +2,10 @@ import { FormEvent, useEffect, useState } from "react";
 import { Header } from "../../components/header";
 import { Input } from "../../components/input";
 
-import { BiTrash } from "react-icons/bi";
+import { BiTrash, BiEdit } from "react-icons/bi";
 
 import { fireStore, auth } from "../../services/firebaseConnection"
-import { addDoc, collection, onSnapshot, query, doc, deleteDoc, where, getDoc } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query, doc, deleteDoc, where, getDoc, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 export interface LinkProps {
@@ -20,7 +20,7 @@ export function Admin() {
 
   const [userId, setUserID] = useState<string | null>(null)
   const [username, setUsername] = useState<string | null>(null)
-
+  const [editId, setEditId] = useState<string | null>(null)
   const [nameLink, setNameLink] = useState("")
   const [urlLink, setUrlLink] = useState("")
   const [colorBackgroundLink, setColorBackgroundLink] = useState("#f1f1f1")
@@ -83,27 +83,49 @@ export function Admin() {
       return
     } 
 
-    if(userId) {
-      addDoc(collection(fireStore, "links"), {
+    if(editId) {
+      const docRef = doc(fireStore, "links", editId)
+      updateDoc(docRef, {
         name: nameLink,
         url: urlLink,
         bg: colorBackgroundLink,
         color: colorTextLink,
-        created: new Date(),
-        userId: userId,
       })
       .then(() => {
-        console.log("Cadastrado com sucesso")
-        setNameLink("");
-        setUrlLink("");
-        setColorBackgroundLink("#f1f1f1");
-        setColorTextLink("#020202");
+        console.log("link atualizado")
+        resetForm()
       })
       .catch((error) => {
-        console.log("Error ao cadastrar", error)
+        console.log("Erro ao atualizar", error)
       })
+    } else {
+      if(userId) {
+        addDoc(collection(fireStore, "links"), {
+          name: nameLink,
+          url: urlLink,
+          bg: colorBackgroundLink,
+          color: colorTextLink,
+          created: new Date(),
+          userId: userId,
+        })
+        .then(() => {
+          console.log("Cadastrado com sucesso")
+          resetForm()
+        })
+        .catch((error) => {
+          console.log("Error ao cadastrar", error)
+        })
+      }
     }
 
+  }
+
+  function resetForm() {
+    setEditId(null);
+    setNameLink("");
+    setUrlLink("");
+    setColorBackgroundLink("#f1f1f1");
+    setColorTextLink("#020202");
   }
 
   function handleDelete(id: string) {
@@ -118,12 +140,23 @@ export function Admin() {
     })
   }
 
+  function handleEdit(id: string) {
+    const linkToEdit = links.find((item) => item.id === id);
+    if(linkToEdit) {
+      setEditId(id);
+      setNameLink(linkToEdit.name)
+      setUrlLink(linkToEdit.url)
+      setColorBackgroundLink(linkToEdit.bg)
+      setColorTextLink(linkToEdit.color)
+    }
+  }
+
   return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2 bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
       <Header username={username}/>
 
       <form onSubmit={handleRegister} className="flex flex-col mt-8 mb-6 w-full max-w-xl bg-customGray p-6 rounded-lg shadow-lg">
-        <h2 className="text-white text-2xl font-bold mb-4">Adicionar novo link</h2>
+        <h2 className="text-white text-2xl font-bold mb-4">{editId ? "Editar link" : "Adicionar link"}</h2>
 
         <label className="text-white font-medium mb-2">Nome do seu link:</label>
         <Input
@@ -190,8 +223,17 @@ export function Admin() {
         <button
         type="submit"
         className="mt-6 bg-indigo-600 hover:bg-indigo-700 transition rounded-lg h-12 text-lg text-white font-medium flex justify-center items-center">
-          Cadastrar
+          {editId ? "Atualizar" : "Cadastrar"}
         </button>
+        {editId && (
+          <button
+          type="button"
+          className="mt-2 bg-gray-500 hover:bg-gray-600 transition rounded-lg h-10 text-lg text-white font-medium flex justify-center items-center"
+          onClick={resetForm}
+          >
+            Cancelar edição
+          </button>
+        )}
 
       </form>
 
@@ -204,12 +246,21 @@ export function Admin() {
           style={{backgroundColor: item.bg, color: item.color}}
           className="flex items-center justify-between w-11/12 max-w-xl shadow-md rounded-md py-3 px-2 mb-2 select-none">
             <p className="font-medium">{item.name}</p>
-            <div>
+            <div className="flex gap-2">
+
+              <button
+              className="border border-dashed p-2 rounded-md bg-zinc-800 hover:bg-indigo-700 transition"
+              onClick={() => handleEdit(item.id)}
+              >
+                <BiEdit color="#fff" size={18}/> 
+              </button>
+
               <button
               className="border border-dashed p-2 rounded-md bg-zinc-800 hover:bg-red-600 transition"
               onClick={() => handleDelete(item.id)}
               >
                 <BiTrash color="#fff" size={18}/> 
+
               </button>
             </div>
           </article>
