@@ -25,7 +25,7 @@ export function Home() {
             </header>
 
             <main>
-                <section className="mt-20 bg-hero-bg h-screen bg-no-repeat bg-cover w-full flex items-center flex-col text-center px-5">
+                <section className="mt-52 bg-hero-bg h-screen bg-no-repeat bg-cover w-full flex items-center flex-col text-center px-5">
                     <div className="mt-20 md:mt-32">
                         <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-textColor max-w-xl md:max-w-3xl">Centralize todos os seus links</h1>
                     </div>
