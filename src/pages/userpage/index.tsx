@@ -51,8 +51,8 @@ export function UserPage() {
     return (
         <main className="flex flex-col items-center min-h-screen bg-gradient-to-b from-indigo-900 via-violet-800 to-indigo-900 p-4">
             
-            <header className="w-full max-w-3xl text-center py-6">
-                <h1 className="text-4xl font-bold text-white">
+            <header className="w-11/12 max-w-3xl text-center py-6">
+                <h1 className="text-4xl font-bold text-white bg-black/30 rounded-md">
                     Links de <span className="bg-gradient-to-r from-violet-500 to-indigo-600 bg-clip-text text-transparent">{username}</span>
                 </h1>
                 <p className="text-zinc-300 mt-2">Clique em qualquer link para acessar!</p>
