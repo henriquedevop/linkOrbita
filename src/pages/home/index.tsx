@@ -6,6 +6,7 @@ import { FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa"
 
 import { fireStore } from "../../services/firebaseConnection"
 import { getDocs, collection, orderBy, query, doc, getDoc } from "firebase/firestore"
+import { Link } from "react-router"
 
 interface SocialLinksProps {
     facebook: string;
@@ -75,24 +76,9 @@ export function Home() {
 
     return (
         <div className="flex flex-col w-full py-4 items-center justify-center">
-            <h1 className="md:text-4xl text-3xl font-bold text-white mt-20">Henrique devop</h1>
-            <span className="text-gray-50 mb-5 mt-3">veja meus links</span>
-
-            <main className="flex flex-col w-11/12 max-w-xl text-center">
-                {Links.map((item) => (
-                    <section 
-                    key={item.id}
-                    className="bg-white mb-4 w-full py-2 select-none rounded-lg transition-transform hover:scale-105 cursor-pointer"
-                    style={{backgroundColor: item.bg, color: item.color}}
-                    >
-                        <a href={item.url} target="_blank">
-                            <p className="text-base md:text-lg">
-                                {item.name}
-                            </p>
-                        </a>
-                    </section>
-                ))}
-            </main>
+            <h1 className="md:text-4xl text-3xl font-bold text-white mt-20">Link Orbita</h1>
+            <span className="text-gray-50 mb-5 mt-3">Crie a sua</span>
+            <Link to="/signup">AQUI</Link>
 
             {socialLinks && Object.keys(socialLinks).length > 0 && (
                 <footer className="flex justify-center gap-3 my-4">

@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router"
 import { Input } from "../../components/input"
 
 import { createUserWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../../services/firebaseConnection"
+import { setDoc, doc } from "firebase/firestore"
+import { auth, fireStore } from "../../services/firebaseConnection"
 import { FormEvent, useState } from "react"
 
 export function SignUp() {
@@ -10,31 +11,43 @@ export function SignUp() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     function handleRegister(e:FormEvent) {
         e.preventDefault()
+        setLoading(true)
         if(username === "" || email === "" || password === "") {
             alert("preencha todos os campos")
+            setLoading(false)
             return
         }
 
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            setUsername("")
-            setEmail("")
-            setPassword("")    
+        .then(async (userCredential) => {
+            const user = userCredential.user
+
+            await setDoc(doc(fireStore, "users", user.uid), {
+               username: username,
+               email: user.email,
+               created: new Date(),
+            })
+
             console.log("Usuario criado com sucesso")
             navigate("/login", {replace: true})
         })
         .catch((error) => {
+            let errorMessage = "Erro ao criar usuário";
             if (error.code === "auth/email-already-in-use") {
-            alert("Esse email já está em uso.");
+                errorMessage = "Este e-mail já está em uso.";
             } else if (error.code === "auth/weak-password") {
-            alert("A senha deve ter pelo menos 6 caracteres.");
-            } else {
-            alert("Erro ao criar usuário. Tente novamente.");
+                errorMessage = "A senha precisa ter pelo menos 6 caracteres.";
             }
+            console.error("Error ao criar usuario", error);
+            alert(errorMessage);
+        })
+        .finally(() => {
+            setLoading(false)
         })
     }
 
@@ -71,9 +84,11 @@ export function SignUp() {
                 <button
                 className="h-9 bg-blue-600 rounded border-0 text-lg font-medium text-white"
                 type="submit"
-                >Criar conta</button>
+                disabled={loading}
+                >{loading ? "Criando sua conta..." : "Criar conta"}</button>
 
             </form>
+            <Link className="text-white" to="/login">Ja tem conta? entre aqui</Link>
         </main>
     )
 }

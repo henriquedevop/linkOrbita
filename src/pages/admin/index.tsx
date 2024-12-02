@@ -4,8 +4,9 @@ import { Input } from "../../components/input";
 
 import { BiTrash } from "react-icons/bi";
 
-import { fireStore } from "../../services/firebaseConnection"
-import { addDoc, collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore";
+import { fireStore, auth } from "../../services/firebaseConnection"
+import { addDoc, collection, onSnapshot, query, doc, deleteDoc, where, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 export interface LinkProps {
   id: string,
@@ -17,6 +18,9 @@ export interface LinkProps {
 
 export function Admin() {
 
+  const [userId, setUserID] = useState<string | null>(null)
+  const [username, setUsername] = useState<string | null>(null)
+
   const [nameLink, setNameLink] = useState("")
   const [urlLink, setUrlLink] = useState("")
   const [colorBackgroundLink, setColorBackgroundLink] = useState("#f1f1f1")
@@ -25,33 +29,51 @@ export function Admin() {
   const [links, setLinks] = useState<LinkProps[]>([])
 
   useEffect(() => {
-    
-    const linksRef = collection(fireStore, "links")
-    const queryRef = query(linksRef, orderBy("created", "asc"))
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserID(user.uid)
 
-    const unSub = onSnapshot(queryRef, (snapshot) => {
-
-      let arr = [] as LinkProps[]
-
-      snapshot.forEach((doc) => {
-        arr.push({
-          id: doc.id,
-          name: doc.data().name,
-          url: doc.data().url,
-          bg: doc.data().bg,
-          color: doc.data().color,
+        const userRef = doc(fireStore, "users", user.uid)
+        getDoc(userRef)
+        .then((snapshot) => {
+          if(snapshot.exists()) {
+            setUsername(snapshot.data().username)
+          }
         })
-      })
-
-      setLinks(arr)
-
+      } else {
+        setUserID(null)
+        setUsername(null)
+      }
     })
 
-    return () => {
-      unSub()
-    }
-
+    console.log(userId)
+    return () => unsubscribe()
   },[])
+
+  useEffect(() => {
+
+    const linksRef = collection(fireStore, "links")
+    const q = query(linksRef, where("userId", "==", userId))
+
+    const unSub = onSnapshot(q, (snapshop) => {
+
+      let arr: LinkProps[] = []
+
+      snapshop.forEach((item) => {
+        arr.push({
+          id: item.id,
+          name: item.data().name,
+          url: item.data().url,
+          bg: item.data().bg,
+          color: item.data().color,
+        })
+      })
+      setLinks(arr)
+    })
+
+    return () => unSub()
+
+  },[userId])
 
   function handleRegister(e:FormEvent) {
     e.preventDefault()
@@ -61,34 +83,44 @@ export function Admin() {
       return
     } 
 
-    addDoc(collection(fireStore, "links"), {
-      name: nameLink,
-      url: urlLink,
-      bg: colorBackgroundLink,
-      color: colorTextLink,
-      created: new Date(),
-    })
-    .then(() => {
-      console.log("Cadastrado com sucesso!")
-      setNameLink("")
-      setUrlLink("")
-      setColorBackgroundLink("#f1f1f1")
-      setColorTextLink("#020202")
-    })
-    .catch((error) => {
-      console.log("Error ao adicionar link", error)
-    })
+    if(userId) {
+      addDoc(collection(fireStore, "links"), {
+        name: nameLink,
+        url: urlLink,
+        bg: colorBackgroundLink,
+        color: colorTextLink,
+        created: new Date(),
+        userId: userId,
+      })
+      .then(() => {
+        console.log("Cadastrado com sucesso")
+        setNameLink("");
+        setUrlLink("");
+        setColorBackgroundLink("#f1f1f1");
+        setColorTextLink("#020202");
+      })
+      .catch((error) => {
+        console.log("Error ao cadastrar", error)
+      })
+    }
 
   }
 
   function handleDelete(id: string) {
     const docRef = doc(fireStore, "links", id)
     deleteDoc(docRef)
+    .then(() => {
+        setLinks(links.filter(link => link.id !== id))
+        console.log("Link deletado com sucesso!")
+    })
+    .catch((error) => {
+        console.error("Erro ao deletar o link:", error)
+    })
   }
 
   return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2">
-      <Header/>
+      <Header username={username}/>
 
       <form onSubmit={handleRegister} className="flex flex-col mt-8 mb-3 w-full max-w-xl">
 

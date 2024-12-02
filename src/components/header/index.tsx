@@ -4,7 +4,11 @@ import { Link } from "react-router"
 import { auth } from "../../services/firebaseConnection"
 import { signOut } from "firebase/auth"
 
-export function Header() {
+interface HeaderProps {
+    username: string | null;
+}
+
+export function Header({ username }: HeaderProps) {
 
     async function handleLogout() {
         try {
@@ -19,7 +23,11 @@ export function Header() {
         <header className="w-full max-w-2xl mt-4 px-1">
             <nav className="w-full bg-white h-12 flex items-center justify-between rounded-md px-3">
                 <div className="flex gap-4 font-medium">
-                    <Link to="/">Home</Link>
+                    {username ? (
+                        <Link to={`/user/${username}`}>Home</Link>
+                    ) : (
+                        <Link to="/">Home</Link>
+                    )}
                     <Link to="/admin">Meus links</Link>
                     <Link to="/admin/social">Redes sociais</Link>
                 </div>
