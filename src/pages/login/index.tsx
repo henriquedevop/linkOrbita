@@ -34,32 +34,59 @@ export function Login() {
     }
 
     return (
-        <div className="flex w-full h-screen items-center justify-center flex-col">
-            <Link to="/">
-                <h1 className="mt-11 text-white mb-7 font-bold text-5xl">link
-                <span className="bg-gradient-to-r from-indigo-700 to-violet-800 bg-clip-text text-transparent">Orbita</span></h1>
-            </Link>
+        <div className="flex w-full h-screen items-center justify-center bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
 
-            <form onSubmit={handleSubmit} className="w-full max-w-xl flex flex-col px-2">
-                <Input 
-                type="email"
-                placeholder="Digite seu email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
+            <div className="bg-customGray p-10 rounded-lg shadow-lg w-full max-w-md">
+                <Link
+                to="/"
+                className="flex justify-center"
+                >
+                <h1 
+                className="text-white font-bold text-5xl mb-7">
+                link
+                <span
+                className="bg-gradient-to-r from-indigo-400 to-violet-600 bg-clip-text text-transparent" 
+                >Órbita</span>
+                </h1>
+                </Link>
 
-                <Input 
-                type="password"
-                placeholder="********"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />  
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                    <Input 
+                    type="email"
+                    placeholder="Digite seu email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    />
 
-                <button 
-                className="h-9 bg-blue-600 rounded border-0 text-lg font-medium text-white"
-                type="submit"
-                >Acessar</button>
-            </form>
+                    <Input 
+                    type="password"
+                    placeholder="********"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    />  
+
+                    <button 
+                    className="h-12 bg-violet-600 hover:bg-violet-700 transition rounded-lg font-medium text-white"
+                    type="submit"
+                    >
+                    Acessar
+                    </button>
+
+                </form>
+
+                <div className="mt-5 text-center">
+                    <p className="text-zinc-400">
+                        Não tem conta?{" "}
+                        <Link
+                        to="/signup"
+                        className="text-violet-400 hover:text-violet-500 font-medium"
+                        >
+                            Cadastre-se
+                        </Link>
+                    </p>
+                </div>
+
+            </div>
         </div>
     )
 }
