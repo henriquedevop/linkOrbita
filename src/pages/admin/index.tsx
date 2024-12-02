@@ -155,7 +155,9 @@ export function Admin() {
     <div className="flex items-center flex-col min-h-screen pb-7 px-2 bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
       <Header username={username}/>
 
-      <form onSubmit={handleRegister} className="flex flex-col mt-8 mb-6 w-full max-w-xl bg-customGray p-6 rounded-lg shadow-lg">
+      <h4 className="w-full max-w-xl mt-4 text-xl text-white font-semibold">Bem vindo, {username}</h4>
+
+      <form onSubmit={handleRegister} className="flex flex-col mt-4 mb-6 w-full max-w-xl bg-customGray p-6 rounded-lg shadow-lg">
         <h2 className="text-white text-2xl font-bold mb-4">{editId ? "Editar link" : "Adicionar link"}</h2>
 
         <label className="text-white font-medium mb-2">Nome do seu link:</label>
