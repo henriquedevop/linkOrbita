@@ -10,6 +10,7 @@ export function UserPage() {
 
     const {username} = useParams()
     const [links, setLinks] = useState<LinkProps[]>([])
+    const [copySucess, setCopySucess] = useState(false)
 
     useEffect(() => {
 
@@ -48,6 +49,20 @@ export function UserPage() {
 
       },[username])
 
+    function handleCopyLink() {
+        const sharebleLink = window.location.href;
+        navigator.clipboard.writeText(sharebleLink)
+        .then(() => {
+            setCopySucess(true)
+            setTimeout(() => {
+                setCopySucess(false)
+            }, 2000);
+        })
+        .catch(() => {
+            console.log("Error ao copiar link")
+        })
+    }
+
     return (
         <main className="flex flex-col items-center min-h-screen bg-gradient-to-b from-indigo-900 via-violet-800 to-indigo-900 p-4">
             
@@ -56,6 +71,9 @@ export function UserPage() {
                     Links de <span className="bg-gradient-to-r from-violet-500 to-indigo-600 bg-clip-text text-transparent">{username}</span>
                 </h1>
                 <p className="text-zinc-300 mt-2">Clique em qualquer link para acessar!</p>
+                
+                <button onClick={handleCopyLink}>{copySucess ? "Link copiado!" : "Copiar link da página"}</button>
+
             </header>
             <section className="w-full max-w-3xl flex flex-col items-center">
                 {links.length > 0 ? (
