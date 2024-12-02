@@ -52,19 +52,29 @@ export function SignUp() {
     }
 
     return (
-        <main className="flex w-full h-screen items-center justify-center flex-col">
-            <Link to="/">
-                <h1 className="mt-11 text-white mb-7 font-bold text-5xl">link
-                <span className="bg-gradient-to-r from-indigo-700 to-violet-800 bg-clip-text text-transparent">Orbita</span></h1>
-            </Link>
+        <div className="flex w-full h-screen items-center justify-center bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
 
-            <form onSubmit={handleRegister} className="w-full max-w-xl flex flex-col px-2">
+            <div className="bg-customGray p-10 rounded-lg shadow-lg w-full max-w-md">
+                <Link
+                to="/"
+                className="flex justify-center"
+                >
+                <h1 
+                className="text-white font-bold text-5xl mb-7">
+                link
+                <span
+                className="bg-gradient-to-r from-indigo-400 to-violet-600 bg-clip-text text-transparent" 
+                >Órbita</span>
+                </h1>
+                </Link>
 
+            <form onSubmit={handleRegister} className="flex flex-col gap-5">
                 <Input
                 type="text"
                 placeholder="Qual seu nome ou apelido?"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
 
                 <Input
@@ -72,6 +82,7 @@ export function SignUp() {
                 placeholder="Digite seu melhor email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
 
                 <Input
@@ -79,16 +90,28 @@ export function SignUp() {
                 placeholder="Criei uma senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
 
                 <button
-                className="h-9 bg-blue-600 rounded border-0 text-lg font-medium text-white"
+                className="h-12 bg-violet-600 hover:bg-violet-700 transition rounded-lg text-lg font-medium text-white"
                 type="submit"
                 disabled={loading}
                 >{loading ? "Criando sua conta..." : "Criar conta"}</button>
 
             </form>
-            <Link className="text-white" to="/login">Ja tem conta? entre aqui</Link>
-        </main>
+            <div className="mt-5 text-center">
+                <p className="text-zinc-400">
+                    Já tem uma conta?{" "}
+                    <Link
+                        to="/login"
+                        className="text-violet-400 hover:text-violet-500 font-medium"
+                    >
+                        Entre aqui
+                    </Link>
+                </p>
+            </div>
+            </div>
+        </div>
     )
 }

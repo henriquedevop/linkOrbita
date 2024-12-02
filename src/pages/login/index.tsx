@@ -56,6 +56,7 @@ export function Login() {
                     placeholder="Digite seu email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
                     />
 
                     <Input 
@@ -63,6 +64,7 @@ export function Login() {
                     placeholder="********"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
                     />  
 
                     <button 
