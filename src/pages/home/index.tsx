@@ -5,7 +5,8 @@ import { FaPaintBrush, FaShare } from "react-icons/fa"
 export function Home() {
     return (
         <div className="bg-bg min-h-screen">
-            <header className="flex flex-col md:flex-row items-center justify-between p-5 md:p-10">
+            <header className="fixed top-0 left-0 right-0 z-50 flex flex-col md:flex-row items-center justify-between p-5 
+            bg-black bg-opacity-30 backdrop-blur-lg">
                 <Link
                 to="/"
                 className="text-2xl md:text-3xl text-textColor font-bold">Link
@@ -90,21 +91,21 @@ export function Home() {
 
                         <div className="bg-customGray w-full md:w-72 rounded-md p-5 shadow-md">
                             <p className="text-zinc-200 mb-4">
-                                Esse link órbita me ajudou em compartilhar e orgazinar meus links, obg.
+                                O Link Órbita me ajudou a compartilhar e organizar meus links. Obrigado!
                             </p>
                             <h4 className="text-white font-bold">- July Lopes</h4>
                         </div>
 
                         <div className="bg-customGray w-full md:w-72 rounded-md p-5 shadow-md">
                             <p className="text-zinc-200 mb-4">
-                                Conheci esse site faz 1 semana e ja adorei, podem usar.
+                                Conheci este site há 1 semana e já gostei bastante. Podem usar!
                             </p>
                             <h4 className="text-white font-bold">- Guilherme Almeida</h4>
                         </div>
 
                         <div className="bg-customGray w-full md:w-72 rounded-md p-5 shadow-md">
                             <p className="text-zinc-200 mb-4">
-                                Estou usando no meu negocio e posso finalmente deixar os links organizados
+                                Estou usando no meu negócio e finalmente posso deixar os links organizados.
                             </p>
                             <h4 className="text-white font-bold">- Anna Júlia</h4>
                         </div>
@@ -162,7 +163,7 @@ export function Home() {
                                 O serviço é gratuito?
                             </summary>
                             <p className="text-zinc-200 mt-2">
-                                Sim! Você pode começar a usar gratuitamente sem nenhum problema!.
+                                Sim! Você pode começar a usar gratuitamente, sem nenhum custo adicional!
                             </p>
                         </details>
 
@@ -171,16 +172,16 @@ export function Home() {
                                 Qualquer um pode acessar o link?
                             </summary>
                             <p className="text-zinc-200 mt-2">
-                                Sim! Basta compartilhar a url gerada e todos verão seus links.
+                                Sim! Basta compartilhar a URL gerada, e todos poderão ver seus links.
                             </p>
                         </details>
                         
                         <details className="bg-customGray rounded-md p-5">
                             <summary className="text-white font-semibold cursor-pointer">
-                                Existe um limites de links que posso cadastrar?
+                                Existe um limite de links que posso cadastrar?
                             </summary>
                             <p className="text-zinc-200 mt-2">
-                                Não! não existe limites, basta criar e compartilhar.
+                                Não! Não há limites. Basta criar e compartilhar!
                             </p>
                         </details>
 
