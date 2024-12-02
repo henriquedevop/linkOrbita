@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 import { BiWorld, BiLink, BiShield } from "react-icons/bi"
 import { FaPaintBrush, FaShare } from "react-icons/fa"
+import { Footer } from "../../components/footer"
 
 export function Home() {
     return (
@@ -211,6 +212,7 @@ export function Home() {
                     </p>
                 </section>
 
+                <Footer/>
             </main>
         </div>
     )
