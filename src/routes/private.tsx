@@ -18,16 +18,8 @@ export function Private({ children }: PrivateProps): any {
         const unSub = onAuthStateChanged(auth, (user) => {
 
             if(user) {
-
-                const userData = {
-                    uid: user?.uid,
-                    email: user?.email 
-                }
-
-                localStorage.setItem("linkOrbita", JSON.stringify(userData))
                 setLoading(false)
                 setSigned(true)
-
             } else {
                 setLoading(false)
                 setSigned(false)
