@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router"
 import { fireStore } from "../../services/firebaseConnection"
 import { collection, query, where, getDocs } from "firebase/firestore"
-import { FaLink } from "react-icons/fa"
+import { FaLink, FaEllipsisV } from "react-icons/fa"
 
 import { LinkProps } from "../admin"
 
@@ -11,6 +11,7 @@ export function UserPage() {
     const {username} = useParams()
     const [links, setLinks] = useState<LinkProps[]>([])
     const [copySucess, setCopySucess] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
 
@@ -68,11 +69,42 @@ export function UserPage() {
             
             <header className="w-11/12 max-w-3xl text-center py-6">
                 <h1 className="text-4xl font-bold text-white bg-black/30 rounded-md">
-                    Links de <span className="bg-gradient-to-r from-violet-500 to-indigo-600 bg-clip-text text-transparent">{username}</span>
+                <>
+                Links de <span className="bg-gradient-to-r from-violet-500 to-indigo-600 bg-clip-text text-transparent">{username}</span>
+                </>
                 </h1>
                 <p className="text-zinc-300 mt-2">Clique em qualquer link para acessar!</p>
-                
-                <button onClick={handleCopyLink}>{copySucess ? "Link copiado!" : "Copiar link da página"}</button>
+
+                <div className="w-11/12 absolute max-w-3xl">
+                <button
+                className="absolute right-0 bottom-10"
+                onClick={() => setIsModalOpen(true)}
+                >
+                <FaEllipsisV className="text-xl text-white"/>
+                </button>
+                </div>
+
+                {isModalOpen && (
+
+                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+
+                        <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+                            <h2 className="text-2xl font-semibold text-center mb-4">Compartilhar</h2>
+                            <button 
+                            className="w-full py-2 px-4 bg-violet-600 hover:bg-violet-700 text-white rounded-md transition"
+                            onClick={handleCopyLink}>
+                            {copySucess ? "Link copiado!" : "Copiar link da página"}</button>
+                            <button
+                            className="mt-4 w-full py-2 px-4 bg-gray-500 hover:bg-gray-600 text-white rounded-md transition"
+                            onClick={() => setIsModalOpen(false)}
+                            >
+                            Fechar
+                            </button>
+                        </div>
+
+                    </div>
+
+                )}
 
             </header>
             <section className="w-full max-w-3xl flex flex-col items-center">
