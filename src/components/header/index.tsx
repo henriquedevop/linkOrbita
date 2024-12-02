@@ -24,7 +24,7 @@ export function Header({ username }: HeaderProps) {
             <nav className="w-full bg-white h-12 flex items-center justify-between rounded-md px-3">
                 <div className="flex gap-4 font-medium">
                     {username ? (
-                        <Link to={`/user/${username}`}>Home</Link>
+                        <Link to={`/user/${username}`}>Minha página</Link>
                     ) : (
                         <Link to="/">Home</Link>
                     )}
