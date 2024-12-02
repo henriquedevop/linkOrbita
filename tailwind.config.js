@@ -2,11 +2,25 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html", // Isso garante que o Tailwind também veja o conteúdo do index.html
-    "./src/**/*.{js,ts,jsx,tsx}", // Rastreia todos os arquivos JS/TS/JSX/TSX dentro de src
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}", 
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif']
+      },
+      colors: {
+        primary: '#6E44FF',
+        secondary: "#560BAD",
+        customGray: "#131313",
+        textColor: "#FFF",
+        bg: "#000",
+      },
+      backgroundImage: {
+        'hero-bg': "url('/src/assets/herobg.svg')"
+      }
+    },
   },
   plugins: [],
 };
