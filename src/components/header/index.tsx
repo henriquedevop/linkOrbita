@@ -45,9 +45,9 @@ export function Header({ username }: HeaderProps) {
                 </div>
 
                 <div
-                    className={`lg:hidden ${isMenuOpen ? "block" : "hidden"} absolute top-16 left-0 w-full bg-black/80 p-6 rounded-lg shadow-lg backdrop-blur-lg border border-white/30`}
+                    className={`lg:hidden ${isMenuOpen ? "block" : "hidden"} absolute top-16 left-0 w-full rounded-lg shadow-lg`}
                 >
-                    <nav className="h-full w-full flex flex-col gap-6 font-semibold text-center">
+                    <nav className="h-full w-full flex flex-col gap-6 font-semibold text-center backdrop-blur-lg  bg-black/80 rounded-lg p-6 border border-white/20">
                         {username ? (
                             <Link className="rounded-lg hover:text-indigo-200 active:text-indigo-400" to={`/user/${username}`}>Minha página</Link>
                         ) : (
