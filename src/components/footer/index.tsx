@@ -24,19 +24,18 @@ export function Footer() {
                                 <Link to="/login" className="hover:text-primary">Login</Link>
                             </li>
                             <li>
-                                <Link to="/login" className="hover:text-primary">Criar conta</Link>
-                            </li>
-                            <li>
-                                <Link to="/about" className="hover:text-primary">Sobre</Link>
-                            </li>
-                            <li>
-                                <Link to="/faq" className="hover:text-primary">FAQ</Link>
+                                <Link to="/signup" className="hover:text-primary">Criar conta</Link>
                             </li>
                         </ul>
                     </nav>
 
-                    <div className="mt-5 text-zinc-400 text-sm text-center sm:text-left">
+                    <div className="mt-5 text-zinc-400 text-sm text-center sm:text-left gap-2">
                         &copy; {new Date().getFullYear()} Link Órbita. Todos os direitos reservados.
+                        <p>Fale direto comigo: ghenriquedevop@gmail.com</p>
+                        <p>Fale direto comigo: (71) 9 9901-3343</p>
+                        <a href="https://github.com/henriquedevop" target="_blank"
+                        className="text-zinc-300 hover:text-white">
+                        Github</a>
                     </div>
 
                 </div>
