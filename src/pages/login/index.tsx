@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { Input } from "../../components/input";
+import { Loading } from "../../components/loading";
 import { FormEvent, useEffect, useState } from "react";
 
 import { auth } from "../../services/firebaseConnection"
@@ -10,13 +11,15 @@ export function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState<string>("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     function handleSubmit(e:FormEvent) {
         e.preventDefault()
-
+        setLoading(true)
         if(email === "" || password === "") {
             setErrorMessage("Preencha todos os campos!")
+            setLoading(false)
             return
         }
 
@@ -28,6 +31,7 @@ export function Login() {
         .catch((error) => {
             console.log("ERROR AO LOGAR USUARIO:")
             console.log(error.code)
+            setLoading(false)
 
             let message = "Erro ao tentar logar";
             switch (error.code) {
@@ -52,7 +56,6 @@ export function Login() {
             setErrorMessage(message)
         })
 
-        setEmail("")
         setPassword("")
 
     }
@@ -70,6 +73,8 @@ export function Login() {
 
     return (
         <div className="flex w-full h-screen items-center justify-center bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
+
+            {loading ? <Loading/> : ""}
 
             <div className="bg-customGray p-10 rounded-lg shadow-lg w-full max-w-md">
                 <Link
