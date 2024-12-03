@@ -1,6 +1,7 @@
 import { onAuthStateChanged, reauthenticateWithCredential } from "firebase/auth"
 import { auth, fireStore } from "../../services/firebaseConnection"
 import { Header } from "../../components/header"
+import { Loading } from "../../components/loading"
 import { FormEvent, useEffect, useState } from "react"
 import { collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore"
 import { EmailAuthProvider } from "firebase/auth/web-extension"
@@ -14,6 +15,7 @@ export function Settings() {
     const [usernameChanges, setUsernameChanges] = useState<number>(0)
     const [errorMessage, setErrorMessage] = useState("")
     const [successfulMessage, setSucessfulMessage] = useState("")
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -42,13 +44,15 @@ export function Settings() {
 
     async function handleEditConfig(e:FormEvent) {
         e.preventDefault()
-
+        setLoading(true)
         if(newUsername === "" || password === "") {
             setErrorMessage("Preencha os campos")
+            setLoading(false)
             return
         }
 
         if(!userId) {
+            setLoading(false)
             return
         }
 
@@ -59,10 +63,12 @@ export function Settings() {
 
             if(!querySnapshot.empty) {
                 setErrorMessage("Esse username já esta sendo usado")
+                setLoading(false)
                 return
             }
             if(usernameChanges >= 3) {
                 setErrorMessage("Você atingiu o limite de alterações de nome de usuário.")
+                setLoading(false)
                 return
             }
 
@@ -77,12 +83,14 @@ export function Settings() {
                     usernameChanges: usernameChanges + 1,
                 })
 
+                setLoading(false)
                 setSucessfulMessage("Nome de usuário atualizado com sucesso!")
                 setErrorMessage("")
 
             }
         } catch(error) {
             console.error("Erro ao atualizar dados.", error)
+            setLoading(false)
             setErrorMessage("Senha incorreta")
         }
 
@@ -91,6 +99,8 @@ export function Settings() {
     return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2 bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
         <Header username={username} />
+
+        {loading ? <Loading/> : ""}
 
         <div className="bg-customGray p-8 rounded-lg shadow-lg w-full max-w-2xl mt-8">
             <h1 className="text-3xl text-white font-bold mb-6 text-center">Configurações da conta</h1>
