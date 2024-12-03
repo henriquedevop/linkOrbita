@@ -4,7 +4,7 @@ import { Input } from "../../components/input"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { setDoc, doc } from "firebase/firestore"
 import { auth, fireStore } from "../../services/firebaseConnection"
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 
 export function SignUp() {
 
@@ -108,6 +108,20 @@ export function SignUp() {
                 placeholder="Criei uma senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
+                />
+
+                <Input
+                type="password"
+                placeholder="Confirme sua senha"
+                onChange={(e) => {
+                    const value = e.target.value
+                    if(value != password) {
+                        setErrorMessage("As senhas não coincidem.")
+                    } else {
+                        setErrorMessage("")
+                    }
+                }}
                 className="p-3 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
 
