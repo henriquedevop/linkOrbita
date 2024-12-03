@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router"
 import { Input } from "../../components/input"
 
 import { createUserWithEmailAndPassword } from "firebase/auth"
-import { setDoc, doc } from "firebase/firestore"
+import { setDoc, doc, collection, where,query, getDocs } from "firebase/firestore"
 import { auth, fireStore } from "../../services/firebaseConnection"
 import { FormEvent, useState } from "react"
 
@@ -15,7 +15,7 @@ export function SignUp() {
     const [errorMessage, setErrorMessage] = useState("")
     const navigate = useNavigate()
 
-    function handleRegister(e:FormEvent) {
+    async function handleRegister(e:FormEvent) {
         e.preventDefault()
         setLoading(true)
         if(username === "" || email === "" || password === "") {
@@ -24,23 +24,30 @@ export function SignUp() {
             return
         }
 
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-            const user = userCredential.user
+        try {
+            const querySnapshot = await getDocs(
+                query(collection(fireStore, "users"), where("username", "==", username))
+            );
+
+            if(!querySnapshot.empty) {
+                setErrorMessage("Este username já está em uso. Tente outro")
+                setLoading(false)
+                return
+            }
+
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            const user = userCredential.user;
 
             await setDoc(doc(fireStore, "users", user.uid), {
-               username: username,
-               email: user.email,
-               created: new Date(),
+                username: username,
+                email: user.email,
+                created: new Date(),
             })
-
+            
             console.log("Usuario criado com sucesso")
             navigate("/login", {replace: true})
-        })
-        .catch((error) => {
-            console.log("Error ao criar conta", error)
-            console.log(error.code)
-
+        } catch (error: any) {
+            console.log("Erro ao criar conta", error);
             let message = "Erro ao criar usuário";
             switch (error.code) {
                 case "auth/email-already-in-use":
@@ -58,11 +65,10 @@ export function SignUp() {
                 default:
                     message = "Erro desconhecido ao criar conta.";
             }
-            setErrorMessage(message)
-        })
-        .finally(() => {
-            setLoading(false)
-        })
+            setErrorMessage(message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
