@@ -46,7 +46,7 @@ export function Admin() {
       }
     })
 
-    console.log(userId)
+    console.log(links)
     return () => unsubscribe()
   },[])
 
@@ -239,7 +239,9 @@ export function Admin() {
 
       </form>
 
-        <h2 className="font-bold text-white mb-4 text-2xl">Meus links:</h2>
+        <h2 className="font-bold text-white mb-4 text-2xl">Meus links</h2>
+
+        <span className="text-zinc-300">{links.length > 0 ? "" : "Nenhum link cadastrado..."}</span>
 
         <div className="flex flex-col gap-4 w-full max-w-xl items-center">
         {links.map((item) => (

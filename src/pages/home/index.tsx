@@ -211,7 +211,9 @@ export function Home() {
                         Comece agora mesmo e crie sua página personalizada de forma rápida e eficiente.
                     </p>
                     <Link 
-                    className="text-lg bg-black text-white font-bold px-6 py-3 rounded-md"
+                    className="text-lg bg-black text-white font-bold px-6 py-3 rounded-md
+                    shadow-lg hover:bg-white hover:border-2 border-black hover:text-black duration-100
+                    "
                     to="signup">
                     Crie sua conta gratuitamente
                     </Link>
