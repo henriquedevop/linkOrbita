@@ -126,9 +126,9 @@ export function Settings() {
 
                     <div>
                         <label htmlFor="email" className="block text-white font-medium mb-2">
-                            Email
+                            Sua senha
                         </label>
-                        <p className="text-zinc-400 text-sm mb-3">ADigite sua senha para confirmar a alteração.</p>
+                        <p className="text-zinc-400 text-sm mb-3">Digite sua senha para confirmar a alteração.</p>
                         <input
                             type="password"
                             placeholder="Digite sua senha"
