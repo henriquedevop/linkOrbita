@@ -29,6 +29,7 @@ export function Header({ username }: HeaderProps) {
                         <Link className="hover:text-indigo-200 active:text-indigo-400" to="/">Home</Link>
                     )}
                     <Link className="hover:text-indigo-200 active:text-indigo-400" to="/admin">Editar Links</Link>
+                    <Link className="hover:text-indigo-200 active:text-indigo-400" to="/admin/settings">Configurações</Link>
                 </div>
 
                 <button 
