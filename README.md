@@ -1,50 +1,47 @@
-# React + TypeScript + Vite
+# Link Órbita
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Preview do Projeto - Tela Inicial](src/assets/previewSite.png)
 
-Currently, two official plugins are available:
+**Link Órbita** é um site criado para centralizar todos os links de uma pessoa ou loja em uma única página personalizada. O projeto foi desenvolvido como parte dos meus estudos de programação, com base em uma dor real que um familiar tinha: organizar os links da sua loja em um só lugar.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Funcionalidades 🚀
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+-  **Centraliza seus links** em uma página personalizada.
+-  **Personalize as cores**: altere a cor do texto e o fundo dos links.
+-  **Crie uma conta** para gerenciar seus links.
+-  **Edite seus links** sempre que necessário.
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Como Executar o Projeto
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone o repositório:  
+   ```bash
+   git clone git@github.com:henriquedevop/linkOrbita.git
+   ```
+2. Navegue até o diretório do projeto::  
+   ```bash
+   cd linkOrbita
+   ```
+3. Instale as dependências:  
+   ```bash
+   npm install
+   ```
+4. Inicie o servidor de desenvolvimento:  
+   ```bash
+   npm run dev
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Feedback
+Teste o site e envie seu feedback! Não cobramos nada, basta usar e aproveitar! Seu retorno é muito importante para nós. 
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Tecnologias Utilizadas ⚙️
+- **React**  
+- **TypeScript**  
+- **Tailwind CSS**  
+- **Firebase**  
+
+## Autor
+Desenvolvido por [Henrique Devop](https://github.com/henriquedevop)
