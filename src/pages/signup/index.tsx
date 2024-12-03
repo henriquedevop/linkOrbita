@@ -11,6 +11,7 @@ export function SignUp() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const navigate = useNavigate()
@@ -18,7 +19,7 @@ export function SignUp() {
     async function handleRegister(e:FormEvent) {
         e.preventDefault()
         setLoading(true)
-        if(username === "" || email === "" || password === "") {
+        if(username === "" || email === "" || password === "" || confirmPassword === "") {
             setErrorMessage("Preencha todos os campos")
             setLoading(false)
             return
@@ -122,6 +123,7 @@ export function SignUp() {
                 placeholder="Confirme sua senha"
                 onChange={(e) => {
                     const value = e.target.value
+                    setConfirmPassword(e.target.value)
                     if(value != password) {
                         setErrorMessage("As senhas não coincidem.")
                     } else {
