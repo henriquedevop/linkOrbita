@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router"
 import { Input } from "../../components/input"
+import { Loading } from "../../components/loading"
 
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { setDoc, doc, collection, where,query, getDocs } from "firebase/firestore"
@@ -74,7 +75,7 @@ export function SignUp() {
 
     return (
         <div className="flex w-full h-screen items-center justify-center bg-gradient-to-r from-indigo-700 via-violet-800 to-indigo-700">
-
+            {loading ? <Loading/> : ""}
             <div className="bg-customGray p-10 rounded-lg shadow-lg w-full max-w-md">
                 <Link
                 to="/"
