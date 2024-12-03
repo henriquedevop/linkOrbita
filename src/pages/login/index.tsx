@@ -9,13 +9,14 @@ export function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [errorMessage, setErrorMessage] = useState<string>("")
     const navigate = useNavigate()
 
     function handleSubmit(e:FormEvent) {
         e.preventDefault()
 
         if(email === "" || password === "") {
-            alert("Preencha todos os campos!")
+            setErrorMessage("Preencha todos os campos!")
             return
         }
 
@@ -26,7 +27,29 @@ export function Login() {
         })
         .catch((error) => {
             console.log("ERROR AO LOGAR USUARIO:")
-            console.log(error)
+            console.log(error.code)
+
+            let message = "Erro ao tentar logar";
+            switch (error.code) {
+                case "auth/invalid-email":
+                    message = "O email fornecido é inválido.";
+                    break;
+                case "auth/user-not-found":
+                    message = "Usuário não encontrado.";
+                    break;
+                case "auth/invalid-credential":
+                    message = "Email ou senha incorretos.";
+                    break;
+                case "auth/too-many-requests":
+                    message = "Muitas tentativas. Tente novamente mais tarde.";
+                    break;
+                case "auth/operation-not-allowed":
+                    message = "Método de autenticação não permitido.";
+                    break;
+                default:
+                    message = "Erro desconhecido."
+            }
+            setErrorMessage(message)
         })
 
         setEmail("")
@@ -61,6 +84,10 @@ export function Login() {
                 >Órbita</span>
                 </h1>
                 </Link>
+
+                {errorMessage && (
+                    <span className="text-primary">{errorMessage}</span>
+                )}
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <Input 

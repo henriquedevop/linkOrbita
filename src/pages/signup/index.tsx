@@ -12,13 +12,14 @@ export function SignUp() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
     const navigate = useNavigate()
 
     function handleRegister(e:FormEvent) {
         e.preventDefault()
         setLoading(true)
         if(username === "" || email === "" || password === "") {
-            alert("preencha todos os campos")
+            setErrorMessage("Preencha todos os campos")
             setLoading(false)
             return
         }
@@ -37,14 +38,27 @@ export function SignUp() {
             navigate("/login", {replace: true})
         })
         .catch((error) => {
-            let errorMessage = "Erro ao criar usuário";
-            if (error.code === "auth/email-already-in-use") {
-                errorMessage = "Este e-mail já está em uso.";
-            } else if (error.code === "auth/weak-password") {
-                errorMessage = "A senha precisa ter pelo menos 6 caracteres.";
+            console.log("Error ao criar conta", error)
+            console.log(error.code)
+
+            let message = "Erro ao criar usuário";
+            switch (error.code) {
+                case "auth/email-already-in-use":
+                    message = "Este email já está em uso.";
+                    break;
+                case "auth/weak-password":
+                    message = "A senha deve ter pelo menos 6 caracteres.";
+                    break;
+                case "auth/invalid-email":
+                    message = "O email fornecido é inválido.";
+                    break;
+                case "auth/operation-not-allowed":
+                    message = "Método de criação de conta não permitido.";
+                    break;
+                default:
+                    message = "Erro desconhecido ao criar conta.";
             }
-            console.error("Error ao criar usuario", error);
-            alert(errorMessage);
+            setErrorMessage(message)
         })
         .finally(() => {
             setLoading(false)
@@ -67,6 +81,10 @@ export function SignUp() {
                 >Órbita</span>
                 </h1>
                 </Link>
+
+                {errorMessage && (
+                    <span className="text-primary">{errorMessage}</span>
+                )}
 
             <form onSubmit={handleRegister} className="flex flex-col gap-5">
                 <Input
