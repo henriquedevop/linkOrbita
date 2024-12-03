@@ -4,7 +4,7 @@ import { Input } from "../../components/input"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { setDoc, doc } from "firebase/firestore"
 import { auth, fireStore } from "../../services/firebaseConnection"
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useState } from "react"
 
 export function SignUp() {
 
