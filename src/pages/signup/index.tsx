@@ -74,7 +74,7 @@ export function SignUp() {
                 className="flex justify-center"
                 >
                 <h1 
-                className="text-white font-bold text-5xl mb-7">
+                className="text-white font-bold mb-2 text-5xl">
                 link
                 <span
                 className="bg-gradient-to-r from-indigo-400 to-violet-600 bg-clip-text text-transparent" 
@@ -86,7 +86,7 @@ export function SignUp() {
                     <span className="text-primary">{errorMessage}</span>
                 )}
 
-            <form onSubmit={handleRegister} className="flex flex-col gap-5">
+            <form onSubmit={handleRegister} className="flex flex-col mt-5 gap-5">
                 <Input
                 type="text"
                 placeholder="Qual seu nome ou apelido?"

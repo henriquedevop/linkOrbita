@@ -16,10 +16,14 @@ export function Home() {
                 
                 <div className="flex gap-2">
                 <Link 
-                className="text-base md:text-lg text-bg font-medium bg-textColor rounded-md px-2 py-2 mt-2 md:mt-0"
+                className="text-base md:text-lg text-bg font-medium bg-textColor rounded-md px-2 py-2 mt-2 md:mt-0
+                hover:bg-indigo-600 hover:text-white duration-200
+                "
                 to="/signup">Começe de graça</Link>
                 <Link 
-                className="text-base md:text-lg text-white font-medium border-2 rounded-md px-2 py-2 mt-2 md:mt-0"
+                className="text-base md:text-lg text-white font-medium border-2 rounded-md px-2 py-2 mt-2 md:mt-0
+                hover:text-indigo-600 hover:border-indigo-600 duration-200
+                "
                 to="/login">Já tenho conta</Link>
                 </div>
             </header>
@@ -36,10 +40,15 @@ export function Home() {
                         Crie uma página personalizada <strong>para compartilhar seus links de forma simples e eficiente.</strong></h3>
                     </div>
                     <div className="mt-10 md:mt-20">
-                        <Link 
+                    <Link 
                         to="/login" 
-                        className="text-sm md:text-2xl text-bg font-medium bg-textColor rounded-md px-6 py-2">
-                        Começe agora</Link>
+                        className="relative text-sm md:text-2xl font-medium bg-textColor text-black rounded-lg px-6 py-2 overflow-hidden group">
+                        <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-600 scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 origin-left rounded-md"></span>
+                        <span className="relative z-10 font-medium transition-colors duration-500 ease-out group-hover:text-white">
+                            Começe agora
+                        </span>
+                    </Link>
+
                     </div>
                 </section>
 

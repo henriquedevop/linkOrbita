@@ -77,7 +77,7 @@ export function Login() {
                 className="flex justify-center"
                 >
                 <h1 
-                className="text-white font-bold text-5xl mb-7">
+                className="text-white font-bold text-5xl">
                 link
                 <span
                 className="bg-gradient-to-r from-indigo-400 to-violet-600 bg-clip-text text-transparent" 
@@ -89,7 +89,7 @@ export function Login() {
                     <span className="text-primary">{errorMessage}</span>
                 )}
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <form onSubmit={handleSubmit} className="flex mt-7 flex-col gap-5">
                     <Input 
                     type="email"
                     placeholder="Digite seu email"
